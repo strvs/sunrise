@@ -1,0 +1,475 @@
+<div class="building">
+    <div class="building-data">
+
+        <script>
+            var dataSelect = {                                                          // данные по квартирам
+                'buildings' : [                                                         // здания
+                    {
+                        'id'        : '1',                                              // ID здания
+                        'title'     : 'Строение 1',                                     // название
+                        'deadline'  : 'II квартал 2026',                                // срок сдачи
+                        'floors'    : [                                                 // этажи в здании
+                            {
+                                'number'    : '3',                                      // номер этажа
+                                'flats'     : [                                         // квартиры
+                                    {
+                                        'number'    : '1',                              // номер квартиры
+                                        'rooms'     : '3',                              // количество комнат
+                                        'size'      : '66.73',                          // площадь
+                                        'preview'   : 'files/select-list-item.png',     // превью для списка
+                                        'fscheme'   : 'files/main-select-floor.png',    // схема расположения квартиры на этаже
+                                        'compass'   : 'files/main-select-compass.png',  // компас
+                                        'url'       : 'detail.html',                    // ссылка на детальную страницу квартиры
+                                        'mainpage'  : true                              // отображать на главной странице
+                                    },
+                                    {
+                                        'number'    : '2',
+                                        'rooms'     : '2',
+                                        'size'      : '42.88',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                        'mainpage'  : true
+                                    },
+                                    {
+                                        'number'    : '3',
+                                        'rooms'     : '3',
+                                        'size'      : '68,96',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                        'mainpage'  : true
+                                    },
+                                    {
+                                        'number'    : '4',
+                                        'rooms'     : '1',
+                                        'size'      : '43.44',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                        'mainpage'  : true
+                                    },
+                                    {
+                                        'number'    : '5',
+                                        'rooms'     : '3',
+                                        'size'      : '71.82',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '6',
+                                        'rooms'     : '3',
+                                        'size'      : '54.17',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '7',
+                                        'rooms'     : '2',
+                                        'size'      : '45.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '71',
+                                        'rooms'     : 'СТ',
+                                        'size'      : '45.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                        'mainpage'  : true
+                                    },
+                                    {
+                                        'number'    : '72',
+                                        'rooms'     : '2',
+                                        'size'      : '45.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                ]
+                            },
+                            {
+                                'number'    : '4',
+                                'flats'     : [
+                                    {
+                                        'number'    : '8',
+                                        'rooms'     : '3',
+                                        'size'      : '66.73',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '9',
+                                        'rooms'     : '2',
+                                        'size'      : '42.88',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '10',
+                                        'rooms'     : '3',
+                                        'size'      : '68.96',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '11',
+                                        'rooms'     : '2',
+                                        'size'      : '43.44',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '12',
+                                        'rooms'     : '3',
+                                        'size'      : '71.82',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '13',
+                                        'rooms'     : '3',
+                                        'size'      : '54.17',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '14',
+                                        'rooms'     : '2',
+                                        'size'      : '45.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                ]
+                            },
+                            {
+                                'number'    : '5',
+                                'flats'     : [
+                                    {
+                                        'number'    : '15',
+                                        'rooms'     : '2',
+                                        'size'      : '45.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                ]
+                            },
+                            {
+                                'number'    : '6',
+                                'flats'     : [
+                                    {
+                                        'number'    : '16',
+                                        'rooms'     : '2',
+                                        'size'      : '45.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                ]
+                            },
+                            {
+                                'number'    : '7',
+                                'flats'     : [
+                                ]
+                            },
+                            {
+                                'number'    : '8',
+                                'flats'     : [
+                                ]
+                            },
+                            {
+                                'number'    : '9',
+                                'flats'     : [
+                                ]
+                            },
+                            {
+                                'number'    : '10',
+                                'flats'     : [
+                                    {
+                                        'number'    : '17',
+                                        'rooms'     : '2',
+                                        'size'      : '45.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                ]
+                            },
+                            {
+                                'number'    : '11',
+                                'flats'     : [
+                                ]
+                            },
+                            {
+                                'number'    : '12',
+                                'flats'     : [
+                                    {
+                                        'number'    : '18',
+                                        'rooms'     : '2',
+                                        'size'      : '45.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                        'mainpage'  : true
+                                    },
+                                ]
+                            },
+                            {
+                                'number'    : '13',
+                                'flats'     : [
+                                ]
+                            },
+                            {
+                                'number'    : '14',
+                                'flats'     : [
+                                ]
+                            },
+                            {
+                                'number'    : '15',
+                                'flats'     : [
+                                    {
+                                        'number'    : '19',
+                                        'rooms'     : '4',
+                                        'size'      : '145.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                        'mainpage'  : true
+                                    },
+                                ]
+                            },
+                            {
+                                'number'    : '16',
+                                'flats'     : [
+                                ]
+                            },
+                            {
+                                'number'    : '17',
+                                'flats'     : [
+                                ]
+                            },
+                            {
+                                'number'    : '18',
+                                'flats'     : [
+                                ]
+                            }
+                        ],
+                    },
+                    {
+                        'id'        : '2',
+                        'title'     : 'Строение 2',
+                        'deadline'  : 'II квартал 2027',
+                        'floors'    : [
+                            {
+                                'number'    : '2',
+                                'flats'     : [
+                                    {
+                                        'number'    : '21',
+                                        'rooms'     : '3',
+                                        'size'      : '66.73',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                        'mainpage'  : true
+                                    },
+                                    {
+                                        'number'    : '22',
+                                        'rooms'     : '2',
+                                        'size'      : '42.88',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '23',
+                                        'rooms'     : '3',
+                                        'size'      : '68.96',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '24',
+                                        'rooms'     : '2',
+                                        'size'      : '43.44',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '25',
+                                        'rooms'     : '3',
+                                        'size'      : '71.82',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '26',
+                                        'rooms'     : '3',
+                                        'size'      : '54.17',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '27',
+                                        'rooms'     : '2',
+                                        'size'      : '45.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                        'mainpage'  : true
+                                    },
+                                ]
+                            },
+                            {
+                                'number'    : '3',
+                                'flats'     : [
+                                    {
+                                        'number'    : '28',
+                                        'rooms'     : '3',
+                                        'size'      : '66.73',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                        'mainpage'  : true
+                                    },
+                                    {
+                                        'number'    : '29',
+                                        'rooms'     : '2',
+                                        'size'      : '42.88',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '210',
+                                        'rooms'     : '3',
+                                        'size'      : '68.96',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '211',
+                                        'rooms'     : '2',
+                                        'size'      : '43.44',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '212',
+                                        'rooms'     : '3',
+                                        'size'      : '71.82',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                    {
+                                        'number'    : '213',
+                                        'rooms'     : '3',
+                                        'size'      : '54.17',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                ]
+                            },
+                            {
+                                'number'    : '4',
+                                'flats'     : [
+                                    {
+                                        'number'    : '218',
+                                        'rooms'     : '2',
+                                        'size'      : '45.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                ]
+                            },
+                            {
+                                'number'    : '5',
+                                'flats'     : [
+                                    {
+                                        'number'    : '219',
+                                        'rooms'     : '4',
+                                        'size'      : '145.71',
+                                        'preview'   : 'files/select-list-item.png',
+                                        'fscheme'   : 'files/main-select-floor.png',
+                                        'compass'   : 'files/main-select-compass.png',
+                                        'url'       : 'detail.html',
+                                    },
+                                ]
+                            },
+                            {
+                                'number'    : '6',
+                                'flats'     : [
+                                ]
+                            },
+                            {
+                                'number'    : '7',
+                                'flats'     : [
+                                ]
+                            },
+                            {
+                                'number'    : '8',
+                                'flats'     : [
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        </script>
+
+    </div>
+</div>
