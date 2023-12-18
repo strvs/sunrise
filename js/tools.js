@@ -289,150 +289,6 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-    $('.main-select').each(function() {
-        var curBlock = $(this);
-        $.ajax({
-            type: 'POST',
-            url: curBlock.attr('data-url'),
-            processData: false,
-            contentType: false,
-            dataType: 'html',
-            cache: false
-        }).done(function(html) {
-            $('.select-data').html($(html).find('.building-data').html());
-            var newData = [];
-            if (typeof(dataSelect) != 'undefined') {
-                for (var i = 0; i < dataSelect.buildings.length; i++) {
-                    var curBuild = dataSelect.buildings[i];
-                    for (var j = 0; j < curBuild.floors.length; j++) {
-                        var curFloor = curBuild.floors[j];
-                        for (var k = 0; k < curFloor.flats.length; k++) {
-                            var curFlat = curFloor.flats[k];
-                            curFlat.build = curBuild.id;
-                            curFlat.floor = curFloor.number;
-                            if (typeof(curFlat.mainpage) != 'undefined' && curFlat.mainpage) {
-                                newData.push(curFlat);
-                            }
-                        }
-                    }
-                }
-            }
-            
-            if (newData.length > 0) {
-                var menuTitlesTexts = $('.main-select-menu').attr('data-titles').split(',');
-                var menuTitles = [];
-                for (var i = 0; i < menuTitlesTexts.length; i++) {
-                    menuTitles.push(menuTitlesTexts[i].split(':'));
-                }
-                var menuItems = [];
-                for (var i = 0; i < newData.length; i++) {
-                    var curRooms = newData[i].rooms;
-                    for (var j = 0; j < menuTitles.length; j++) {
-                        if (curRooms == menuTitles[j][0]) {
-                            var hasItem = false;
-                            for (var k = 0; k < menuItems.length; k++) {
-                                if (curRooms == menuItems[k][0]) {
-                                    hasItem = true;
-                                }
-                            }
-                            if (!hasItem) {
-                                menuItems.push(menuTitles[j]);
-                            }
-                        }
-                    }
-                }
-                menuItems.sort(function(a, b) {
-                    var curA = Number(a[0]);
-                    if (Number.isNaN(curA)) {
-                        curA = -Infinity;
-                    }
-                    var curB = Number(b[0]);
-                    if (Number.isNaN(curB)) {
-                        curB = -Infinity;
-                    }
-                    if (curA > curB) return 1;
-                    if (curA == curB) return 0;
-                    if (curA < curB) return -1;
-                });
-                
-                for (var i = 0; i < menuItems.length; i++) {
-                    var curRoom = menuItems[i][0];
-                    var curMin = Infinity;
-                    for (var j = 0; j < newData.length; j++) {
-                        var curFlat = newData[j];
-                        if (curFlat.rooms == curRoom) {
-                            var flatSize = Number(String(curFlat.size).replace(',', '.'));
-                            if (flatSize < curMin) {
-                                curMin = flatSize;
-                            }
-                        }
-                    }
-                    menuItems[i][2] = curMin;
-                }
-
-                var menuHTML =  '';
-                var tabsHTML =  '';
-                var moreTitle = $('.main-select-tabs').attr('data-moretitle');
-                for (var i = 0; i < menuItems.length; i++) {
-                    menuHTML +=     '<div class="main-select-menu-item">' +
-                                        '<a href="#">' +
-                                            '<div class="main-select-menu-item-title">' + menuItems[i][1] + '</div>' +
-                                            '<div class="main-select-menu-item-size">от ' + menuItems[i][2] + ' м<sup>2</sup></div>' +
-                                        '</a>' +
-                                    '</div>';
-
-                    tabsHTML += '<div class="main-select-tab">' +
-                                    '<div class="main-select-list swiper">' +
-                                        '<div class="main-select-list-inner swiper-wrapper">';
-
-                    for (var j = 0; j < newData.length; j++) {
-                        var curFlat = newData[j];
-                        if (curFlat.rooms == menuItems[i][0]) {
-                            tabsHTML +=     '<div class="main-select-list-item swiper-slide">' +
-                                                '<div class="main-select-list-item-scheme"><a href="' + curFlat.preview + '" data-fancybox><img src="' + curFlat.preview + '" alt=""></a></div>' +
-                                                '<div class="main-select-list-item-bottom">' +
-                                                    '<div class="main-select-list-item-bottom-inner">' +
-                                                        '<div class="main-select-list-item-compass"><img src="' + curFlat.compass + '" alt=""></div>' +
-                                                        '<div class="main-select-list-item-floor"><img src="' + curFlat.fscheme + '" alt=""></div>' +
-                                                    '</div>' +
-                                                '</div>' +
-                                                '<div class="main-select-list-item-btn"><a href="' + curFlat.url + '" class="btn">' + moreTitle + '</a></div>' +
-                                            '</div>';
-                        }
-                    }
-                    tabsHTML +=         '</div>' +
-                                        '<div class="main-select-list-ctrl">' +
-                                            '<div class="swiper-button-prev"><svg><use xlink:href="' + pathTemplate + 'images/sprite.svg#swiper-prev"></use></svg></div>' +
-                                            '<div class="swiper-pagination"></div>' +
-                                            '<div class="swiper-button-next"><svg><use xlink:href="' + pathTemplate + 'images/sprite.svg#swiper-next"></use></svg></div>' +
-                                        '</div>' +
-                                    '</div>' +
-                                '</div>';
-                }
-                $('.main-select-menu-inner').html(menuHTML);
-                $('.main-select-tabs').html(tabsHTML);
-
-                $('.main-select-menu-item').eq(0).addClass('active');
-                $('.main-select-tab').eq(0).addClass('active');
-
-                $('.main-select-list').each(function() {
-                    var curSlider = $(this);
-                    const swiper = new Swiper(curSlider[0], {
-                        loop: true,
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true
-                        }
-                    });
-                });
-            }
-        });
-    });
-
     Fancybox.bind('[data-fancybox]');
 
     $('.select-params').each(function() {
@@ -687,6 +543,8 @@ function initForm(curForm) {
     });
 }
 
+var mainSelectMenuSwiper;
+
 $(window).on('load', function() {
     if (window.location.hash != '') {
         var curBlock = $('[data-id="' + window.location.hash.replace('#', '') + '"]');
@@ -694,6 +552,182 @@ $(window).on('load', function() {
             $('html, body').animate({'scrollTop': curBlock.offset().top});
         }
     }
+
+    $('.main-select').each(function() {
+        var curBlock = $(this);
+        $.ajax({
+            type: 'POST',
+            url: curBlock.attr('data-url'),
+            processData: false,
+            contentType: false,
+            dataType: 'html',
+            cache: false
+        }).done(function(html) {
+            $('.select-data').html($(html).find('.building-data').html());
+            var newData = [];
+            if (typeof(dataSelect) != 'undefined') {
+                for (var i = 0; i < dataSelect.buildings.length; i++) {
+                    var curBuild = dataSelect.buildings[i];
+                    for (var j = 0; j < curBuild.floors.length; j++) {
+                        var curFloor = curBuild.floors[j];
+                        for (var k = 0; k < curFloor.flats.length; k++) {
+                            var curFlat = curFloor.flats[k];
+                            curFlat.build = curBuild.id;
+                            curFlat.floor = curFloor.number;
+                            if (typeof(curFlat.mainpage) != 'undefined' && curFlat.mainpage) {
+                                newData.push(curFlat);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (newData.length > 0) {
+                var menuTitlesTexts = $('.main-select-menu').attr('data-titles').split(',');
+                var menuTitles = [];
+                for (var i = 0; i < menuTitlesTexts.length; i++) {
+                    menuTitles.push(menuTitlesTexts[i].split(':'));
+                }
+                var menuItems = [];
+                for (var i = 0; i < newData.length; i++) {
+                    var curRooms = newData[i].rooms;
+                    for (var j = 0; j < menuTitles.length; j++) {
+                        if (curRooms == menuTitles[j][0]) {
+                            var hasItem = false;
+                            for (var k = 0; k < menuItems.length; k++) {
+                                if (curRooms == menuItems[k][0]) {
+                                    hasItem = true;
+                                }
+                            }
+                            if (!hasItem) {
+                                menuItems.push(menuTitles[j]);
+                            }
+                        }
+                    }
+                }
+                menuItems.sort(function(a, b) {
+                    var curA = Number(a[0]);
+                    if (Number.isNaN(curA)) {
+                        curA = -Infinity;
+                    }
+                    var curB = Number(b[0]);
+                    if (Number.isNaN(curB)) {
+                        curB = -Infinity;
+                    }
+                    if (curA > curB) return 1;
+                    if (curA == curB) return 0;
+                    if (curA < curB) return -1;
+                });
+
+                for (var i = 0; i < menuItems.length; i++) {
+                    var curRoom = menuItems[i][0];
+                    var curMin = Infinity;
+                    for (var j = 0; j < newData.length; j++) {
+                        var curFlat = newData[j];
+                        if (curFlat.rooms == curRoom) {
+                            var flatSize = Number(String(curFlat.size).replace(',', '.'));
+                            if (flatSize < curMin) {
+                                curMin = flatSize;
+                            }
+                        }
+                    }
+                    menuItems[i][2] = curMin;
+                }
+
+                var menuHTML =  '';
+                var tabsHTML =  '';
+                var moreTitle = $('.main-select-tabs').attr('data-moretitle');
+                for (var i = 0; i < menuItems.length; i++) {
+                    menuHTML +=     '<div class="main-select-menu-item">' +
+                                        '<a href="#">' +
+                                            '<div class="main-select-menu-item-title">' + menuItems[i][1] + '</div>' +
+                                            '<div class="main-select-menu-item-size">от ' + menuItems[i][2] + ' м<sup>2</sup></div>' +
+                                        '</a>' +
+                                    '</div>';
+
+                    tabsHTML += '<div class="main-select-tab">' +
+                                    '<div class="main-select-list swiper">' +
+                                        '<div class="main-select-list-inner swiper-wrapper">';
+
+                    for (var j = 0; j < newData.length; j++) {
+                        var curFlat = newData[j];
+                        if (curFlat.rooms == menuItems[i][0]) {
+                            tabsHTML +=     '<div class="main-select-list-item swiper-slide">' +
+                                                '<div class="main-select-list-item-scheme"><a href="' + curFlat.preview + '" data-fancybox><img src="' + curFlat.preview + '" alt=""></a></div>' +
+                                                '<div class="main-select-list-item-bottom">' +
+                                                    '<div class="main-select-list-item-bottom-inner">' +
+                                                        '<div class="main-select-list-item-compass"><img src="' + curFlat.compass + '" alt=""></div>' +
+                                                        '<div class="main-select-list-item-floor"><img src="' + curFlat.fscheme + '" alt=""></div>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div class="main-select-list-item-btn"><a href="' + curFlat.url + '" class="btn">' + moreTitle + '</a></div>' +
+                                            '</div>';
+                        }
+                    }
+                    tabsHTML +=         '</div>' +
+                                        '<div class="main-select-list-ctrl">' +
+                                            '<div class="swiper-button-prev"><svg><use xlink:href="' + pathTemplate + 'images/sprite.svg#swiper-prev"></use></svg></div>' +
+                                            '<div class="swiper-pagination"></div>' +
+                                            '<div class="swiper-button-next"><svg><use xlink:href="' + pathTemplate + 'images/sprite.svg#swiper-next"></use></svg></div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>';
+                }
+                $('.main-select-menu-inner').html(menuHTML);
+                $('.main-select-tabs').html(tabsHTML);
+
+                if ($(window).width() > 1199) {
+                    if ($('.main-select-menu').length > 0) {
+                        var curSlider = $('.main-select-menu');
+                        if (curSlider.hasClass('swiper-initialized') && mainSelectMenuSwiper) {
+                            mainSelectMenuSwiper.destroy();
+                            curSlider.removeClass('swiper');
+                            curSlider.find('.main-select-menu-inner').removeClass('swiper-wrapper');
+                            curSlider.find('.main-select-menu-item').removeClass('swiper-slide');
+                        }
+                    }
+                } else {
+                    if ($('.main-select-menu').length > 0) {
+                        var curSlider = $('.main-select-menu');
+                        if (!curSlider.hasClass('swiper-initialized')) {
+                            curSlider.addClass('swiper');
+                            curSlider.find('.main-select-menu-inner').addClass('swiper-wrapper');
+                            curSlider.find('.main-select-menu-item').addClass('swiper-slide');
+                            curSlider.find('.main-select-menu-item a').eq(0).trigger('click');
+                            mainSelectMenuSwiper = new Swiper(curSlider[0], {
+                                slidesPerView: 'auto',
+                                centeredSlides: true,
+                                on: {
+                                    slideChange: function () {
+                                        curSlider.find('.main-select-menu-item a').eq(mainSelectMenuSwiper.activeIndex).trigger('click');
+                                    },
+                                },
+                            });
+                        }
+                    }
+                }
+
+                $('.main-select-menu-item').eq(0).addClass('active');
+                $('.main-select-tab').eq(0).addClass('active');
+
+                $('.main-select-list').each(function() {
+                    var curSlider = $(this);
+                    const swiper = new Swiper(curSlider[0], {
+                        loop: true,
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true
+                        }
+                    });
+                });
+            }
+        });
+    });
+
 });
 
 function windowOpen(linkWindow, dataWindow) {
@@ -775,37 +809,45 @@ function windowClose() {
     }
 }
 
-var mainSelectMenuSwiper;
+var lastScrollTop = 0;
+var didScroll = false;
+var delta = 5;
 
-$(window).on('load resize', function() {
-    if ($(window).width() > 1199) {
-        if ($('.main-select-menu').length > 0) {
-            var curSlider = $('.main-select-menu');
-            if (curSlider.hasClass('swiper-initialized') && mainSelectMenuSwiper) {
-                mainSelectMenuSwiper.destroy();
-                curSlider.removeClass('swiper');
-                curSlider.find('.main-select-menu-inner').removeClass('swiper-wrapper');
-                curSlider.find('.main-select-menu-item').removeClass('swiper-slide');
+$(window).on('scroll', function() {
+    didScroll = true;
+    window.setInterval(function() {
+        if (didScroll) {
+            var st = $(window).scrollTop();
+            if (Math.abs(lastScrollTop - st) <= delta) {
+                return;
             }
-        }
-    } else {
-        if ($('.main-select-menu').length > 0) {
-            var curSlider = $('.main-select-menu');
-            if (!curSlider.hasClass('swiper-initialized')) {
-                curSlider.addClass('swiper');
-                curSlider.find('.main-select-menu-inner').addClass('swiper-wrapper');
-                curSlider.find('.main-select-menu-item').addClass('swiper-slide');
-                curSlider.find('.main-select-menu-item a').eq(0).trigger('click');
-                mainSelectMenuSwiper = new Swiper(curSlider[0], {
-                    slidesPerView: 'auto',
-                    centeredSlides: true,
-                    on: {
-                        slideChange: function () {
-                            curSlider.find('.main-select-menu-item a').eq(mainSelectMenuSwiper.activeIndex).trigger('click');
-                        },
-                    },
-                });
+            if (st > lastScrollTop && st > $('header').height()) {
+                $('header').addClass('header-up');
+            } else {
+                if (st + $(window).height() < $(document).height()) {
+                    $('header').removeClass('header-up');
+                }
             }
+			lastScrollTop = st;
+            didScroll = false;
         }
-    }
+    }, 50);
+});
+
+$(window).on('load resize scroll', function() {
+    var windowScroll = $(window).scrollTop();
+    $('.welcome').each(function() {
+        if (windowScroll > $('.welcome').height()) {
+            $('header').addClass('fixed')
+        } else {
+            $('header').removeClass('fixed')
+        }
+    });
+    $('.select-header').each(function() {
+        if (windowScroll > $('.select-header').height()) {
+            $('header').addClass('fixed')
+        } else {
+            $('header').removeClass('fixed')
+        }
+    });
 });

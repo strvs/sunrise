@@ -40,9 +40,11 @@ label.error {display:none !important}
 .wrapper {display:flex; flex-direction:column; width:100%; min-width:390px; min-height:100%; position:relative; overflow:hidden}
 .wrapper-inner {height:100%; flex:1; display:flex; position:relative; flex-direction:column}
 
-header {position:absolute; left:64px; right:64px; top:24px; display:flex; align-items:center; z-index:20}
+header {position:fixed; left:64px; right:64px; top:24px; display:flex; align-items:center; z-index:20; transition:transform 0.2s}
+header.header-up {transform:translateY(-200%)}
 .header-logo {min-width:133px; max-width:133px}
 .header-logo img {display:block; width:133px}
+.header-logo img:nth-child(2) {display:none}
 .header-title {margin:0 0 0 46px; font-size:16px; line-height:19px; color:#FFFFFF; text-transform:uppercase}
 .header-phone {margin:0 0 0 46px; display:flex; font-weight:500; font-size:16px; line-height:19px; color:#FCBD16}
 .header-phone a {display:flex; align-items:center; text-decoration:none}
@@ -59,8 +61,23 @@ header {position:absolute; left:64px; right:64px; top:24px; display:flex; align-
     .header-title {margin:0; position:absolute; left:0; top:121px; width:170px}
     .header-phone {margin:0 0 0 43px; flex-grow:1}
     .header-order {display:none}
+    header.header-up .header-title {display:none}
 }
 
+header.fixed .header-logo img:nth-child(1) {display:none}
+header.fixed .header-logo img:nth-child(2) {display:block}
+header.fixed .header-title {color:#000000}
+header.fixed .header-order a {border:1px solid rgba(0, 0, 0, 0.25); color:#000000}
+header.fixed .header-order a:hover {color:#FFFFFF; background:#000000; border-color:#000000}
+header.fixed .header-menu-link svg {fill:#000000}
+header.fixed .header-menu-link:hover svg {fill:#FCBD16}
+
+@media (max-width:1199px) {
+    header.fixed .header-title {display:none}
+}
+
+.header-detail .header-logo img:nth-child(1) {display:none}
+.header-detail .header-logo img:nth-child(2) {display:block}
 .header-detail .header-title {color:#000000}
 .header-detail .header-order a {border:1px solid rgba(0, 0, 0, 0.25); color:#000000}
 .header-detail .header-order a:hover {color:#FFFFFF; background:#000000; border-color:#000000}
