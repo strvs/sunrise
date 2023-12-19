@@ -187,8 +187,11 @@ header.fixed .header-menu-link:hover svg {fill:#FCBD16}
 .presentation-link a {display:flex; align-items:center; text-decoration:none; color:#252822; font-weight:500; font-size:14px; line-height:16px; text-transform:uppercase; transition:color 0.2s}
 .presentation-link a:hover {color:#FCBD16}
 .presentation-link a span {opacity:0.5; font-weight:normal; margin:0 0 0 8px}
-.presentation-link a svg {width:32px; height:32px; fill:#FCBD16; margin:0 0 0 8px}
+.presentation-link a em {position:relative; width:32px; height:32px; margin:0 0 0 8px; display:block}
+.presentation-link a svg {width:32px; height:32px; fill:#FCBD16}
+.presentation-link a svg+svg {position:absolute; left:0; top:0}
 .presentation-link a:hover svg {animation:bounce 0.5s}
+.presentation-link a:hover svg+svg {animation:none}
 @keyframes bounce {
     0%, 20%, 60%, 100% {transform:translateY(0)}
     40% {transform:translateY(-10px)}

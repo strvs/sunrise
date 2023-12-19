@@ -13,7 +13,11 @@
     </symbol>
 
     <symbol viewBox="0 0 32 32" id="icon-download">
-        <path d="M4 25.3333H28V27.9999H4V25.3333ZM17.3333 11.9999H26.6667L16 22.6666L5.33333 11.9999H14.6667V1.33325H17.3333V11.9999Z" />
+        <path d="M17.3333 11.9999H26.6667L16 22.6666L5.33333 11.9999H14.6667V1.33325H17.3333V11.9999Z" />
+    </symbol>
+
+    <symbol viewBox="0 0 32 32" id="icon-download-line">
+        <path d="M4 25.3333H28V27.9999H4V25.3333Z" />
     </symbol>
 
     <symbol viewBox="0 0 24 24" id="icon-download-2">
